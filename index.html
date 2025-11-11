@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI Dashboard - Air Quality Monitoring</title>
+    <link rel="stylesheet" href="styles2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🌍 Air Quality Index Dashboard</h1>
+            <p class="subtitle">Real-time monitoring and predictions</p>
+        </header>
+
+        <!-- Alert Banner -->
+        <div id="alertBanner" class="alert-banner hidden">
+            <span id="alertIcon">⚠️</span>
+            <span id="alertMessage"></span>
+            <button id="closeAlert" class="close-btn">&times;</button>
+        </div>
+
+        <!-- City Selector -->
+        <div class="city-selector">
+            <label for="citySelect">Select City/Region:</label>
+            <select id="citySelect">
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="bangalore">Bangalore</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="chennai">Chennai</option>
+                <option value="lucknow">Lucknow</option>
+            </select>
+            <button id="refreshBtn" class="refresh-btn">🔄 Refresh Data</button>
+        </div>
+
+        <!-- Current AQI Section -->
+        <div class="dashboard-grid">
+            <div class="card current-aqi">
+                <h2>Current AQI</h2>
+                <div class="aqi-display">
+                    <div id="aqiValue" class="aqi-value">--</div>
+                    <div id="aqiCategory" class="aqi-category">Loading...</div>
+                </div>
+                <div class="last-updated">Last updated: <span id="lastUpdated">--</span></div>
+            </div>
+
+            <!-- Prediction Card -->
+            <div class="card prediction">
+                <h2>24-Hour Prediction</h2>
+                <div class="prediction-display">
+                    <div class="prediction-item">
+                        <span class="prediction-label">Tomorrow</span>
+                        <div id="tomorrowAQI" class="prediction-value">--</div>
+                    </div>
+                    <div class="prediction-item">
+                        <span class="prediction-label">Next 24h Avg</span>
+                        <div id="avg24hAQI" class="prediction-value">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pollutants Card -->
+            <div class="card pollutants">
+                <h2>Major Pollutants</h2>
+                <div class="pollutant-grid">
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">PM2.5</span>
+                        <span id="pm25Value" class="pollutant-value">--</span>
+                    </div>
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">PM10</span>
+                        <span id="pm10Value" class="pollutant-value">--</span>
+                    </div>
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">NO₂</span>
+                        <span id="no2Value" class="pollutant-value">--</span>
+                    </div>
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">O₃</span>
+                        <span id="o3Value" class="pollutant-value">--</span>
+                    </div>
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">SO₂</span>
+                        <span id="so2Value" class="pollutant-value">--</span>
+                    </div>
+                    <div class="pollutant-item">
+                        <span class="pollutant-name">CO</span>
+                        <span id="coValue" class="pollutant-value">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="card chart-card">
+                <h2>AQI Trend (Last 7 Days)</h2>
+                <canvas id="aqiTrendChart"></canvas>
+            </div>
+
+            <div class="card chart-card">
+                <h2>Pollutants Distribution</h2>
+                <canvas id="pollutantsChart"></canvas>
+            </div>
+
+            <div class="card chart-card full-width">
+                <h2>Hourly AQI Forecast (Next 24 Hours)</h2>
+                <canvas id="forecastChart"></canvas>
+            </div>
+        </div>
+
+        <!-- AQI Legend -->
+        <div class="card aqi-legend">
+            <h2>AQI Categories</h2>
+            <div class="legend-grid">
+                <div class="legend-item good">
+                    <span class="legend-range">0-50</span>
+                    <span class="legend-label">Good</span>
+                </div>
+                <div class="legend-item moderate">
+                    <span class="legend-range">51-100</span>
+                    <span class="legend-label">Moderate</span>
+                </div>
+                <div class="legend-item unhealthy-sensitive">
+                    <span class="legend-range">101-150</span>
+                    <span class="legend-label">Unhealthy for Sensitive Groups</span>
+                </div>
+                <div class="legend-item unhealthy">
+                    <span class="legend-range">151-200</span>
+                    <span class="legend-label">Unhealthy</span>
+                </div>
+                <div class="legend-item very-unhealthy">
+                    <span class="legend-range">201-300</span>
+                    <span class="legend-label">Very Unhealthy</span>
+                </div>
+                <div class="legend-item hazardous">
+                    <span class="legend-range">301+</span>
+                    <span class="legend-label">Hazardous</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Data simulated for demonstration purposes | Updates every 5 minutes</p>
+			<p>Developed By <b>Team Green Vision</b></p>
+        </footer>
+    </div>
+
+    <script src="script5.js"></script>
+    <!-- <script src="script_2.js"></script> -->
+    <!-- <script src="script3.js"></script> -->
+</body>
+</html>
